@@ -9,12 +9,12 @@
 const foodIsCooked = function(kind, internalTemp, doneness) {
   // Check meat type
   if (kind == 'chicken') {
-    // Check is meat temp is within required range
+    // Check if meat temp is within required range
     return internalTemp > 165 ? true : false;
 
   // Check meat type
   } else if (kind == 'beef') {
-    // Check doneness then check is within required range
+    // Check doneness then check if meat temp within required range
     if (doneness == 'rare') {
       return (internalTemp > 125 && internalTemp <= 135) ? true : false;
     } else if (doneness == 'medium') {
