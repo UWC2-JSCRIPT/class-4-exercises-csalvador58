@@ -1,4 +1,5 @@
 const blackjackDeck = getDeck();
+console.clear();
 
 /**
  * Represents a card player (including dealer).
@@ -126,6 +127,8 @@ const determineWinner = (playerScore, dealerScore) => {
       result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. Player Wins!`;
       break;
   }
+  // Display winner as HTML
+  displayWinner.textContent = result;
   return result;
 }
 
@@ -143,14 +146,31 @@ const getMessage = (count, dealerCard) => {
  * @param {CardPlayer} player 
  */
 const showHand = (player) => {
+  // Select DOM element and append a node to display text
+  const displayPlayer = document.querySelector("#displayPlayer");
+  const pEl = document.createElement("p");
+  displayPlayer.appendChild(pEl);
+
+
   const displayHand = player.hand.map((card) => card.displayVal);
+
   console.log(`${player.name}'s hand is ${displayHand.join(', ')} (${calcPoints(player.hand).total})`);
+
+  // Display player hand as HTML
+  const pTextNode = document.createTextNode(`${player.name}'s hand is ${displayHand.join(', ')} (${calcPoints(player.hand).total})`);
+  pEl.appendChild(pTextNode);
 }
 
 /**
  * Runs Blackjack Game
  */
 const startGame = function() {
+
+  // // Code to use JS DOM to display game winner/scores
+  // const displayPlayer = document.querySelector("#displayPlayer");
+  // const displayDealer = document.querySelector("#displayDealer");
+  // const displayWinner = document.querySelector("#displayWinner");
+
   player.drawCard();
   dealer.drawCard();
   player.drawCard();
@@ -164,9 +184,13 @@ const startGame = function() {
     showHand(player);
   }
   if (playerScore > 21) {
+    // Display winner as HTML
+    displayWinner.textContent = 'You went over 21 - you lose!';
     return 'You went over 21 - you lose!';
   }
   console.log(`Player stands at ${playerScore}`);
+  // Display status as HTML
+  displayPlayerStatus.textContent = `Player stands at ${playerScore}`;
 
   let dealerScore = calcPoints(dealer.hand).total;
   while (dealerScore < 21 && dealerShouldDraw(dealer.hand)) {
@@ -175,9 +199,13 @@ const startGame = function() {
     showHand(dealer);
   }
   if (dealerScore > 21) {
+    // Display winner as HTML
+    displayWinner.textContent = 'Dealer went over 21 - you win!';
     return 'Dealer went over 21 - you win!';
   }
   console.log(`Dealer stands at ${dealerScore}`);
+  // Display status as HTML
+  displayDealerStatus.textContent = `Dealer stands at ${dealerScore}`;
 
   return determineWinner(playerScore, dealerScore);
 }
