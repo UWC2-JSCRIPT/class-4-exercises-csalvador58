@@ -99,11 +99,10 @@ const dealerShouldDraw = (dealerHand) => {
  * @returns {string} Shows the player's score, the dealer's score, and who wins
  */
 const determineWinner = (playerScore, dealerScore) => {
-  console.log(playerScore)
-  console.log(dealerScore)
 
   let result;
 
+  // Create switch statement to run through possible win/loss scenarios and return result.
   switch(true) {
     case (dealerScore > 21):
       result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. Dealer Busts! Player Wins!`;
@@ -182,4 +181,4 @@ const startGame = function() {
 
   return determineWinner(playerScore, dealerScore);
 }
-// console.log(startGame());
+console.log(startGame());
