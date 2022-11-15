@@ -51,8 +51,8 @@ const deck = getDeck();
 console.log(`Deck length equals 52? ${deck.length === 52}`);
 
 const randomCard = deck[Math.floor(Math.random() * 52)];
-console.log('Random card: ');
-console.log(randomCard);
+console.log('Random card: '); // Added line to check
+console.log(randomCard);      // Added line to check
 
 const cardHasVal = randomCard && randomCard.val && typeof randomCard.val === 'number';
 console.log(`Random card has val? ${cardHasVal}`);
