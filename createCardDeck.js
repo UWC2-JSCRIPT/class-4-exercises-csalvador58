@@ -15,13 +15,13 @@ const getDeck = () => {
   let count = 1;
   let countSuit = 0;
 
-  // Create function to create a new card in deck array
+  // Function to create a new card object in the deck array
   const createCard = (value, display, suitCard) => {
     const card = {val: value, displayVal: String(display), suit: suitCard};
     deck.push(card);
   }
 
-  // Create while loop to build a 52 card deck array
+  // While loop to build a 52 card deck array
   while (deck.length !== 52) {
     
     if (deck.length == 0 || count % 14 == 0) {   // Create Ace cards
@@ -30,16 +30,16 @@ const getDeck = () => {
     } else if (count > 10) {   // Create Special Cards
       createCard(10, specialCards[(count % 10) - 1], suits[countSuit]);
 
-    } else {         // Create normal cards
+    } else {         // Create normal cards from '2' through '10'
       createCard(count, count, suits[countSuit]);
     }
 
     // Track status counters to ensure correct card and suit are created
     count++;
     if (count == 14) {
-      countSuit++;
+      countSuit++;    // Increase counter to start creating cards with next suit
     } else if (count == 15) {
-      count = 2;
+      count = 2;      // Reset counter to create cards in each suit, starts at '2' since 'Ace' card is in place of '1'
     }
   }
   return deck;
