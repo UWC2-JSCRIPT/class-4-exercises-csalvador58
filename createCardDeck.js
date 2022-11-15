@@ -22,7 +22,7 @@ const getDeck = () => {
   }
 
   // While loop to build a 52 card deck array
-  while (deck.length !== 52) {
+  while (deck.length < 52) {
     
     if (deck.length == 0 || count % 14 == 0) {   // Create Ace cards
       createCard(11, 'Ace', suits[countSuit]);
