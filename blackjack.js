@@ -77,8 +77,19 @@ const calcPoints = (hand) => {
  * @returns {boolean} whether dealer should draw another card
  */
 const dealerShouldDraw = (dealerHand) => {
-  // CREATE FUNCTION HERE
+  // Create dealer draw rules with if and else statements
+  const dealerPoints = calcPoints(dealerHand);
 
+  // Dealer must draw if hand is 16 points or less
+  if (dealerPoints.total <= 16) {
+    return true;
+  } else if (dealerPoints.total == 17 && dealerPoints.isSoft == true) {
+    // Dealer must draw if hand is exactly 17 points and has an Ace valued at 11
+    return true;
+  } else {
+    // Dealer does not draw and ends turn
+    return false;
+  }
 }
 
 /**
