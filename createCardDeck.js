@@ -10,7 +10,7 @@ const getDeck = () => {
   // Initialize variables that will be used in function
   const deck = [];
   const suits = ['hearts', 'diamonds', 'spades', 'clubs'];
-  const specialCards =['Jack', 'Queen', 'King'];
+  const specialCards = ['Jack', 'Queen', 'King'];
 
   let count = 1;
   let countSuit = 0;

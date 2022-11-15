@@ -1,4 +1,5 @@
 const blackjackDeck = getDeck();
+// Cleared prior console logs from checks in createCardDeck.js file 
 console.clear();
 
 /**
