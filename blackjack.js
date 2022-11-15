@@ -99,8 +99,35 @@ const dealerShouldDraw = (dealerHand) => {
  * @returns {string} Shows the player's score, the dealer's score, and who wins
  */
 const determineWinner = (playerScore, dealerScore) => {
-  // CREATE FUNCTION HERE
+  console.log(playerScore)
+  console.log(dealerScore)
 
+  let result;
+
+  switch(true) {
+    case (dealerScore > 21):
+      result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. Dealer Busts! Player Wins!`;
+      break;
+    case (playerScore > 21):
+      result = `Dealer's Score: ${dealerScore}, Player's Score: ${playerScore}. Player Busts! Dealer Wins!`;
+      break;
+    case (dealerScore == playerScore):
+      result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. It's a tie game!`;
+      break;
+    case ((playerScore == 21)):
+      result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. Blackjack! Player Wins!`;
+      break;
+    case ((dealerScore == 21)):
+      result = `Dealer's Score: ${dealerScore}, Player's Score: ${playerScore}. Blackjack! Dealer Wins!`;
+      break;
+    case ((21 - dealerScore) < (21 - playerScore)):
+      result = `Dealer's Score: ${dealerScore}, Player's Score: ${playerScore}. Dealer Wins!`;
+      break;
+    case ((21 - dealerScore) > (21 - playerScore)):
+      result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. Player Wins!`;
+      break;
+  }
+  return result;
 }
 
 /**
