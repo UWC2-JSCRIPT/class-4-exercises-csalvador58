@@ -105,6 +105,12 @@ const determineWinner = (playerScore, dealerScore) => {
 
   // Create switch statement to run through possible win/loss scenarios and return result.
   switch(true) {
+    case ((playerScore == 21) && (player.hand.length == 2)):
+      result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. Blackjack! Player Wins!`;
+      break;
+    case ((dealerScore == 21) && (dealer.hand.length == 2)):
+      result = `Dealer's Score: ${dealerScore}, Player's Score: ${playerScore}. Blackjack! Dealer Wins!`;
+      break;
     case (dealerScore > 21):
       result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. Dealer Busts! Player Wins!`;
       break;
@@ -114,12 +120,6 @@ const determineWinner = (playerScore, dealerScore) => {
     case (dealerScore == playerScore):
       result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. It's a tie game!`;
       break;
-    case ((playerScore == 21)):
-      result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. Blackjack! Player Wins!`;
-      break;
-    case ((dealerScore == 21)):
-      result = `Dealer's Score: ${dealerScore}, Player's Score: ${playerScore}. Blackjack! Dealer Wins!`;
-      break;
     case ((21 - dealerScore) < (21 - playerScore)):
       result = `Dealer's Score: ${dealerScore}, Player's Score: ${playerScore}. Dealer Wins!`;
       break;
@@ -127,7 +127,7 @@ const determineWinner = (playerScore, dealerScore) => {
       result = `Player's Score: ${playerScore}, Dealer's Score: ${dealerScore}. Player Wins!`;
       break;
   }
-  // Display winner as HTML
+  // {EXTRA CREDIT - Problem 7} Display winner as HTML
   displayWinner.textContent = result;
   return result;
 }
@@ -146,7 +146,7 @@ const getMessage = (count, dealerCard) => {
  * @param {CardPlayer} player 
  */
 const showHand = (player) => {
-  // Select DOM element and append a node to display text
+  // {EXTRA CREDIT - Problem 7} Select DOM element and append a node to display text
   const displayPlayer = document.querySelector("#displayPlayer");
   const pEl = document.createElement("p");
   displayPlayer.appendChild(pEl);
@@ -156,7 +156,7 @@ const showHand = (player) => {
 
   console.log(`${player.name}'s hand is ${displayHand.join(', ')} (${calcPoints(player.hand).total})`);
 
-  // Display player hand as HTML
+  // {EXTRA CREDIT - Problem 7} Display player hand as HTML
   const pTextNode = document.createTextNode(`${player.name}'s hand is ${displayHand.join(', ')} (${calcPoints(player.hand).total})`);
   pEl.appendChild(pTextNode);
 }
@@ -166,17 +166,22 @@ const showHand = (player) => {
  */
 const startGame = function() {
 
-  // // Code to use JS DOM to display game winner/scores
-  // const displayPlayer = document.querySelector("#displayPlayer");
-  // const displayDealer = document.querySelector("#displayDealer");
-  // const displayWinner = document.querySelector("#displayWinner");
-
   player.drawCard();
   dealer.drawCard();
   player.drawCard();
   dealer.drawCard();
 
   let playerScore = calcPoints(player.hand).total;
+  let dealerScore = calcPoints(dealer.hand).total;
+
+  // {EXTRA CREDIT - Problem 8} Check if a player has Blackjack and end game
+  playerScore = calcPoints(player.hand).total;
+  dealerScore = calcPoints(dealer.hand).total;
+  if (playerScore == 21 || dealerScore == 21) {
+    // determineWinner function is optimized to check for Blackjack win in first 2 cards 
+    return determineWinner(playerScore, dealerScore);
+  } 
+
   showHand(player);
   while (playerScore < 21 && confirm(getMessage(playerScore, dealer.hand[0]))) {
     player.drawCard();
@@ -184,27 +189,27 @@ const startGame = function() {
     showHand(player);
   }
   if (playerScore > 21) {
-    // Display winner as HTML
+    // {EXTRA CREDIT - Problem 7} Display winner as HTML
     displayWinner.textContent = 'You went over 21 - you lose!';
     return 'You went over 21 - you lose!';
   }
   console.log(`Player stands at ${playerScore}`);
-  // Display status as HTML
+  // {EXTRA CREDIT - Problem 7} Display status as HTML
   displayPlayerStatus.textContent = `Player stands at ${playerScore}`;
 
-  let dealerScore = calcPoints(dealer.hand).total;
+
   while (dealerScore < 21 && dealerShouldDraw(dealer.hand)) {
     dealer.drawCard();
     dealerScore = calcPoints(dealer.hand).total;
     showHand(dealer);
   }
   if (dealerScore > 21) {
-    // Display winner as HTML
+    // {EXTRA CREDIT - Problem 7} Display winner as HTML
     displayWinner.textContent = 'Dealer went over 21 - you win!';
     return 'Dealer went over 21 - you win!';
   }
   console.log(`Dealer stands at ${dealerScore}`);
-  // Display status as HTML
+  // {EXTRA CREDIT - Problem 7} Display status as HTML
   displayDealerStatus.textContent = `Dealer stands at ${dealerScore}`;
 
   return determineWinner(playerScore, dealerScore);
