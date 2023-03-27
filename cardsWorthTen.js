@@ -21,7 +21,12 @@ const cards = [
  * @param {array} cards
  * @return {string} displayVal
  */
-const cardsWorthTen = cards => {};
+const cardsWorthTen = cards => {
+  return cards.filter(item => item.val == 10).map(item => item.displayVal);
+};
+/* Code explained:
+The filter method is first called on the 'cards' array to check the 'val' property of each object and only include those with a value equal to 10. The map method was then applied to create a new array with the filtered objects but only include the values from the displayVal property.
+*/
 
 console.log(cardsWorthTen(cards));
 // should return/log "10, Jack, Queen, King"
